@@ -1,4 +1,4 @@
-class NPC
+class NPChar
     def initialize
     end
     
