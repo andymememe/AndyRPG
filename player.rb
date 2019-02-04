@@ -44,8 +44,8 @@ class Player
         @items = [Item.new]
     end
     
-    def update(atk=0)
-        @hp = @hp - atk
+    def update(mod_hp=0)
+        @hp = @hp + mod_hp
     end
     
     def button_down(id)

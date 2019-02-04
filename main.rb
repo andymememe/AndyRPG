@@ -66,8 +66,12 @@ class AndyRPG < Gosu::Window
             if @gameover then
                 @player.button_down(id)
                 self.reset
+            else
+                @player.button_down(id)
             end
-        when Gosu::KB_NUMPAD_5
+        when Gosu::KB_NUMPAD_MINUS
+            @player.update(-50)
+        when Gosu::KB_NUMPAD_PLUS 
             @player.update(50)
         else
             if not @gameover then
