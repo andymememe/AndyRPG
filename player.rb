@@ -18,6 +18,8 @@ FEMALE_HAIRS = [*(5443 .. 5475)].select do |i|
     not MALE_HAIRS.include?(i)
 end
 
+TOMB = 45
+
 class Player
     attr_accessor :weapon, :shield, :accessories, :items
     attr_reader :hp, :x, :y
@@ -42,7 +44,8 @@ class Player
         @items = [Item.new]
     end
     
-    def update
+    def update(atk=0)
+        @hp = @hp - atk
     end
     
     def button_down(id)
@@ -64,12 +67,16 @@ class Player
     end
     
     def draw(tileset)
-        tileset[@base].draw(@x, @y, 12)
-        tileset[@hair].draw(@x, @y, 13)
-        
-        @weapon.draw(tileset, @x, @y)
-        @shield.draw(tileset, @x, @y)
-        
-        @accessories.each { |x| x.draw(tileset, @x, @y) }
+        if @hp > 0 then
+            tileset[@base].draw(@x, @y, 12)
+            tileset[@hair].draw(@x, @y, 13)
+            
+            @weapon.draw(tileset, @x, @y)
+            @shield.draw(tileset, @x, @y)
+            
+            @accessories.each { |x| x.draw(tileset, @x, @y) }
+        else
+            tileset[TOMB].draw(@x, @y, 12)
+        end
     end
 end

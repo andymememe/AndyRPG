@@ -36,6 +36,7 @@ class AndyRPG < Gosu::Window
         if @player.hp < 1 then
             @gameover = true
         elsif not @gameover then
+            @player.update(0)
             @camera_x = [[@player.x - WIDTH / 2, 0].max,
                          @map.width * PIXEL - WIDTH].min
             @camera_y = [[@player.y - HEIGHT / 2, 0].max,
@@ -44,6 +45,7 @@ class AndyRPG < Gosu::Window
     end
     
     def draw
+        @ui.draw
         if @gameover then
             @ui.draw_gameover
         else
@@ -59,9 +61,18 @@ class AndyRPG < Gosu::Window
     def button_down(id)
         case id
         when Gosu::KB_ESCAPE
-          close
+            close
+        when Gosu::KB_RETURN
+            if @gameover then
+                @player.button_down(id)
+                self.reset
+            end
+        when Gosu::KB_NUMPAD_5
+            @player.update(50)
         else
-          @player.button_down(id)
+            if not @gameover then
+                @player.button_down(id)
+            end
         end
     end
 end
