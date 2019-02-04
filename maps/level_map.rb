@@ -1,4 +1,8 @@
 class LevelMap
+    def self.getMap
+        self.new(20, 15, 10, 7)
+    end
+    
     def initialize(b_x, b_y, s_x, s_y)
         @b_x, @b_y, @s_x, @s_y = b_x, b_y, s_x, s_y
     end
